@@ -8,6 +8,7 @@ var pinLayer = document.querySelector(".map__pins");
 var cardLayer = document.querySelector(".map");
 var mapFilters = document.querySelector(".map__filters-container");
 
+
 var getRandomElement = function(array) {
   var randomElement = array[Math.floor(Math.random() * array.length)];
 
@@ -57,7 +58,7 @@ var rooms = [1, 2, 3, 4, 5];
 var times = ["12:00", "13:00", "14:00"];
 var types = ["palace", "flat", "house", "bungalo"];
 var features = ["wifi", "dishwasher", "parking", "washer", "elevator", "conditioner"];
-var titles = ["Большая уютная квартира", "Маленькая неуютная квартира", "Огромный прекрасный дворец", "Маленький ужасный дворец", "Красивый гоствеой домик", "Некрасивый негостеприимный домик", "Уютное бунгало далеко от моря", "Неуютное бунгало по колено в воде"];
+var titles = ["Большая уютная квартира", "Маленькая неуютная квартира", "Огромный прекрасный дворец", "Маленький ужасный дворец", "Красивый гостевой домик", "Некрасивый негостеприимный домик", "Уютное бунгало далеко от моря", "Неуютное бунгало по колено в воде"];
 var photos = ["http://o0.github.io/assets/images/tokyo/hotel1.jpg", "http://o0.github.io/assets/images/tokyo/hotel2.jpg", "http://o0.github.io/assets/images/tokyo/hotel3.jpg"]
 
 var generateAd = function() {
@@ -100,17 +101,22 @@ function setupPin(advertise, template) {
 
   pinElement.style.cssText = `left: ${advertise.location.x}px; top: ${advertise.location.y}px`;
   pinElement.querySelector("img").src = advertise.author.avatar + ".png";
+  pinElement.addEventListener("click", function() {
+    renderCard(advertise, )
+  })
   return pinElement;
 }
 
-function renderPins(adList, template, layer) {
-  var documentFragment = document.createDocumentFragment();
+function renderPins(adList) {
+  var pinDocumentFragment = document.createDocumentFragment();
 
   for (var i = 0; i < adList.length; i++) {
-    var newPin = setupPin(adList[i], template);
-    documentFragment.appendChild(newPin);
+    var newPin = setupPin(adList[i], pinTemplate);
+    newPin.value = i;
+    pinDocumentFragment.appendChild(newPin);
   }
-  pinLayer.appendChild(documentFragment);
+
+  pinLayer.appendChild(pinDocumentFragment);
 }
 
 function setupCard(advertise, template) {
@@ -135,10 +141,10 @@ function setupCard(advertise, template) {
   return cardElement;
 }
 
-function renderCard(advertise, template, layer) {
-  var cardElement = setupCard(advertise, template);
+function renderCard(advertise) {
+  var cardElement = setupCard(advertise, cardTemplate);
 
-  layer.insertBefore(cardElement, mapFilters);
+  cardLayer.insertBefore(cardElement, mapFilters);
 }
 
 function setPhotos(cardElement, advertise) {
@@ -200,8 +206,6 @@ function setFeatures(cardElement, advertise) {
 }
 
 
-mapElement.classList.remove("map--faded");
-
 fillAdList(advertiseList, advertiseAmount);
-renderPins(advertiseList, pinTemplate, pinLayer);
-renderCard(advertiseList[0], cardTemplate, cardLayer);
+
+// --> form.js (activateMap);
