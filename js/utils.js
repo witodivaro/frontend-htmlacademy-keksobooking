@@ -1,45 +1,54 @@
-(function utils() {
-  utils = {
-    getRandomElement: function(array) {
-      var randomElement = array[Math.floor(Math.random() * array.length)];
-      return randomElement;
-    },
+(function() {
+  function getRandomElement(array) {
+    var randomElement = array[Math.floor(Math.random() * array.length)];
+    return randomElement;
+  };
 
-    getRandomUniqueElement: function(array) {
-      var elementIndex = Math.floor(Math.random() * array.length)
-      var randomElement = array[elementIndex];
-      array.splice(elementIndex, 1);
+  function getRandomUniqueElement(array) {
+    var elementIndex = Math.floor(Math.random() * array.length)
+    var randomElement = array[elementIndex];
+    array.splice(elementIndex, 1);
 
-      return randomElement;
-    },
+    return randomElement;
+  };
 
-    getRandomNumber: function(min, max) {
-      var randomNumber = Math.floor(Math.random()*(max - min) + min);
+  function getRandomNumber(min, max) {
+    var randomNumber = Math.floor(Math.random()*(max - min) + min);
 
-      return randomNumber;
-    },
+    return randomNumber;
+  };
 
-    getListOfRandomElements: function(array) {
-      var randomElements = [];
-      var randomElementsNumber = Math.floor(Math.random() * array.length);
-      var clonedArray = array.slice();
+  function getListOfRandomElements(array) {
+    var randomElements = [];
+    var randomElementsNumber = Math.floor(Math.random() * array.length);
+    var clonedArray = array.slice();
 
-      for (var i = 0; i < randomElementsNumber; i++) {
-        randomElements.push(getRandomUniqueElement(clonedArray));
-      }
-
-      return randomElements;
-    },
-
-    getRandomlySortedList: function(array) {
-      var randomlySortedList = [];
-      var clonedArray = array.slice();
-
-      while (clonedArray.length > 0) {
-        randomlySortedList.push(getRandomUniqueElement(clonedArray));
-      }
-      return randomlySortedList;
+    for (var i = 0; i < randomElementsNumber; i++) {
+      randomElements.push(getRandomUniqueElement(clonedArray));
     }
+
+    return randomElements;
+  };
+
+  function getRandomlySortedList(array) {
+    var randomlySortedList = [];
+    var clonedArray = array.slice();
+
+    while (clonedArray.length > 0) {
+      randomlySortedList.push(getRandomUniqueElement(clonedArray));
+    }
+    return randomlySortedList;
+  };
+
+  utils = {
+    getRandomElement: getRandomElement,
+    getRandomUniqueElement: getRandomUniqueElement,
+    getRandomNumber: getRandomNumber,
+    getListOfRandomElements: getListOfRandomElements,
+    getRandomlySortedList: getRandomlySortedList,
+    ESC_KEYCODE: 27,
   }
+
   window.utils = utils;
+}
 )();

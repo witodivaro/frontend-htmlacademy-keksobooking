@@ -1,4 +1,4 @@
-(function card() {
+(function() {
   var cardTemplate = document.querySelector("#card").content.querySelector(".map__card");
 
   function setupCard(advertise) {
@@ -23,13 +23,6 @@
     return cardElement;
   }
 
-  function renderCard(advertise, cardLayer = document.querySelector(".map")) {
-
-    var cardElement = setupCard(advertise);
-    var mapFilters = document.querySelector(".map__filters-container");
-
-    cardLayer.insertBefore(cardElement, mapFilters);
-  }
 
   function setPhotos(cardElement, advertise) {
     var photosLayer = cardElement.querySelector(".popup__photos");
@@ -89,8 +82,26 @@
     }
   }
 
+  function renderCard(advertise, cardLayer = document.querySelector(".map")) {
+    var cardElement = setupCard(advertise);
+    var mapFilters = document.querySelector(".map__filters-container");
+    var cardClose = cardElement.querySelector(".popup__close");
+
+    function onCardCloseClick() {
+      removeExistingCard(cardLayer);
+    }
+
+    cardClose.addEventListener("click", onCardCloseClick);
+    cardLayer.insertBefore(cardElement, mapFilters);
+  }
+
+  function removeExistingCard(cardLayer = document.querySelector(".map")) {
+    existingCard = cardLayer.querySelector(".map__card");
+    cardLayer.removeChild(existingCard);
+  }
   card = {
-    renderCard: renderCard;
+    renderCard: renderCard,
+    removeExistingCard: removeExistingCard,
   }
 
   window.card = card;

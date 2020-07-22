@@ -112,7 +112,7 @@
 
         <fieldset class="ad-form__element">
           <label class="ad-form__label" for="type">Тип жилья</label>
-          <select onchange="changePriceByType()" id="type" name="type">
+          <select onchange="window.form.changePriceByType()" id="type" name="type">
             <option value="bungalo">Бунгало</option>
             <option value="flat" selected>Квартира</option>
             <option value="house">Дом</option>
@@ -144,7 +144,7 @@
 
         <fieldset class="ad-form__element">
           <label class="ad-form__label" for="room_number">Количество комнат</label>
-          <select id="room_number" name="rooms" onchange = "changeCapaityAvailable()">
+          <select id="room_number" name="rooms" onchange = "window.form.changeCapaityAvailable()">
             <option value="1" selected>1 комната</option>
             <option value="2">2 комнаты</option>
             <option value="3">3 комнаты</option>
@@ -154,7 +154,7 @@
 
         <fieldset class="ad-form__element">
           <label class="ad-form__label" for="capacity">Количество мест</label>
-          <select id="capacity" name="capacity" onchange = "resetValidity()">
+          <select id="capacity" name="capacity" onchange = "window.form.resetValidity()">
             <option value="3" disabled>для 3 гостей</option>
             <option value="2" disabled>для 2 гостей</option>
             <option value="1" selected>для 1 гостя</option>
@@ -264,7 +264,14 @@
     </div>
   </template>
 
+  <!-- SCHEME: utils > data > map > card > pin > form -->
+
+  <script src="js/utils.js"></script>
+  <script src="js/data.js"></script>
   <script src="js/map.js"></script>
+  <script src="js/card.js"></script>
+  <script src="js/pin.js"></script>
+  <script src="js/drag.js"></script>
   <script src="js/form.js"></script>
 
 </body>
