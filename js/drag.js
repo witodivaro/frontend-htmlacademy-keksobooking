@@ -1,3 +1,5 @@
+"use strict";
+
 (function() {
   var layer = document.querySelector(".map__pins");
   var layerWidth = layer.offsetWidth;
@@ -7,6 +9,7 @@
   var MIN_LEFT = 0;
   var MIN_TOP = 0;
   var MAX_TOP = layerHeight - window.pin.MAIN_PIN_HEIGHT;
+  var startCoords, shift, currentPos;
 
 
   mainPin.addEventListener("mousedown", function(evt) {

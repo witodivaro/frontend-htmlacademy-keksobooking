@@ -1,3 +1,5 @@
+"use strict";
+
 (function() {
   var adForm = document.querySelector(".ad-form");
   var fieldsets = adForm.querySelectorAll("fieldset");
@@ -5,7 +7,7 @@
   var body = document.querySelector("body");
   var successTemplate = document.querySelector("#success").content.querySelector(".success");
   var adCapacitySelect = document.querySelector("#capacity");
-
+  var uploadURL = "https://javascript.pages.academy/keksobooking";
 
   function disableFieldsets() {
     adForm.classList.add("ad-form--disabled");
@@ -98,13 +100,6 @@
     }
   }
 
-  function onAdFormSubmit(evt) {
-    evt.preventDefault();
-    window.map.disableMap();
-    disableFieldsets();
-    showSuccess();
-    window.pin.removePins();
-  }
 
   function createSuccess() {
     var successElement = successTemplate.cloneNode(true);
@@ -136,12 +131,27 @@
     document.addEventListener("keydown", closeSuccessOnEscape);
   };
 
+  function onAdFormSubmit(evt) {
+    evt.preventDefault();
+    var formData = new FormData(adForm);
+
+    window.backend.upload(uploadURL, formData, function(response) {
+      showSuccess();
+      window.map.disableMap();
+      window.pin.removePins();
+      disableFieldsets();
+    });
+
+  }
+
+
   adForm.addEventListener("submit", onAdFormSubmit);
+
   disableFieldsets();
   fillAddress();
   renderSuccess();
 
-  form = {
+  var form = {
     activateFieldsets: activateFieldsets,
     fillAddress: fillAddress,
     changePriceByType: changePriceByType,

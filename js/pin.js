@@ -1,3 +1,5 @@
+"use strict";
+
 (function() {
   var pinTemplate = document.querySelector("#pin").content.querySelector(".map__pin");
   var pinDocumentFragment = document.createDocumentFragment();
@@ -9,9 +11,10 @@
     var pinElement = pinTemplate.cloneNode(true);
 
     pinElement.style.cssText = `left: ${advertise.location.x}px; top: ${advertise.location.y}px`;
-    pinElement.querySelector("img").src = advertise.author.avatar + ".png";
+    pinElement.querySelector("img").src = advertise.author.avatar;
     pinElement.addEventListener("click", function() {
-      window.card.renderCard(advertise, window.map.cardLayer)
+      window.card.removeExistingCard(window.map.cardLayer);
+      window.card.renderCard(advertise, window.map.cardLayer);
     })
     return pinElement;
   }
@@ -38,7 +41,7 @@
 
 
 
-  pin = {
+  var pin = {
     renderPins: renderPins,
     removePins: removePins,
     MAIN_PIN_HEIGHT: MAP_PIN_HEIGHT,

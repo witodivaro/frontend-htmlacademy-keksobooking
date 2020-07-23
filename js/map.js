@@ -1,3 +1,7 @@
+"use strict";
+
+//  GET: https://javascript.pages.academy/keksobooking/data
+// POST: https://javascript.pages.academy/keksobooking
 
 (function() {
   var mapElement = document.querySelector(".map");
@@ -5,10 +9,15 @@
   var cardLayer = document.querySelector(".map");
   var advertiseList = [];
   var advertiseAmount = 8;
+  var downloadUrl = 'https://javascript.pages.academy/keksobooking/data'
 
   debugger;
 
-  window.data.fillAdList(advertiseList, advertiseAmount);
+  function onDownload(response) {
+    advertiseList = response.slice();
+  }
+
+  window.backend.download(downloadUrl, onDownload);
 
   function activateMap() {
     if (mapElement.classList.contains("map--faded")) {
@@ -23,7 +32,7 @@
     window.card.removeExistingCard();
   }
 
-  map = {
+  var map = {
     pinLayer: pinLayer,
     cardLayer: cardLayer,
     activateMap: activateMap,

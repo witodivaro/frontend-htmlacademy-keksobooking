@@ -1,3 +1,5 @@
+"use strict";
+
 (function() {
   function getRandomElement(array) {
     var randomElement = array[Math.floor(Math.random() * array.length)];
@@ -40,7 +42,7 @@
     return randomlySortedList;
   };
 
-  utils = {
+  var utils = {
     getRandomElement: getRandomElement,
     getRandomUniqueElement: getRandomUniqueElement,
     getRandomNumber: getRandomNumber,

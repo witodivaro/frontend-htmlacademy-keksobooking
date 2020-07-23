@@ -1,3 +1,5 @@
+"use strict";
+
 (function() {
   var cardTemplate = document.querySelector("#card").content.querySelector(".map__card");
 
@@ -15,7 +17,7 @@
     cardElement.querySelector(".popup__text--time").textContent = `Заезд после ${advertise.offer.checkin}, выезд до ${advertise.offer.checkout}`;
     cardElement.querySelector(".popup__text--address").textContent = advertise.offer.address;
     cardElement.querySelector(".popup__description").textContent = advertise.offer.description;
-    cardElement.querySelector(".popup__avatar").src = advertise.author.avatar + ".png";
+    cardElement.querySelector(".popup__avatar").src = advertise.author.avatar;
     setFeatures(cardElement, advertise);
     setPhotos(cardElement, advertise);
 
@@ -96,10 +98,14 @@
   }
 
   function removeExistingCard(cardLayer = document.querySelector(".map")) {
-    existingCard = cardLayer.querySelector(".map__card");
-    cardLayer.removeChild(existingCard);
+    try {
+      var existingCard = cardLayer.querySelector(".map__card");
+      cardLayer.removeChild(existingCard);
+    } catch (e) {
+      console.log("ОПА, НА ГАНДЮЗЦУ");
+    }
   }
-  card = {
+  var card = {
     renderCard: renderCard,
     removeExistingCard: removeExistingCard,
   }
