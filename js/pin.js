@@ -6,6 +6,7 @@
   var mapPin = document.querySelector(".map__pin--main");
   var MAP_PIN_WIDTH = 64;
   var MAP_PIN_HEIGHT = 75;
+  var maxPinCount = 5;
 
   function setupPin(advertise) {
     var pinElement = pinTemplate.cloneNode(true);
@@ -21,7 +22,7 @@
 
   function renderPins(adList, pinLayer = document.querySelector(".map__pins")) {
 
-    for (var i = 0; i < adList.length; i++) {
+    for (var i = 0; i < (adList.length < 5? adList.length : maxPinCount); i++) {
       var newPin = setupPin(adList[i], pinTemplate);
       newPin.value = i;
       pinDocumentFragment.appendChild(newPin);

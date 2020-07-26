@@ -11,10 +11,11 @@
   var advertiseAmount = 8;
   var downloadUrl = 'https://javascript.pages.academy/keksobooking/data'
 
-  debugger;
-
   function onDownload(response) {
     advertiseList = response.slice();
+    if (window.map) {
+      window.map.advertiseList = advertiseList;
+    }
   }
 
   window.backend.download(downloadUrl, onDownload);
@@ -33,10 +34,11 @@
   }
 
   var map = {
-    pinLayer: pinLayer,
-    cardLayer: cardLayer,
-    activateMap: activateMap,
-    disableMap: disableMap,
+    pinLayer,
+    cardLayer,
+    activateMap,
+    disableMap,
+    advertiseList,
   }
 
   window.map = map;

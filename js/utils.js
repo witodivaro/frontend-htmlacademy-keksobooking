@@ -42,12 +42,21 @@
     return randomlySortedList;
   };
 
+  function checkArrayIncluded(fullArray, includedArray) {
+
+    for (var i = 0; i < includedArray.length; i++) {
+      if (!fullArray.includes(includedArray[i])) return false;
+    }
+    return true;
+  }
+
   var utils = {
     getRandomElement: getRandomElement,
     getRandomUniqueElement: getRandomUniqueElement,
     getRandomNumber: getRandomNumber,
     getListOfRandomElements: getListOfRandomElements,
     getRandomlySortedList: getRandomlySortedList,
+    checkArrayIncluded,
     ESC_KEYCODE: 27,
   }
 
