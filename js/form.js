@@ -15,6 +15,7 @@
     for (var i = 0; i < fieldsets.length; i++) {
       fieldsets[i].setAttribute("disabled", "disabled");
     }
+    window.photoUploader.resetImages();
   }
 
   function activateFieldsets() {
